@@ -6,8 +6,10 @@ import com.yoprogramo.portfolio.Repository.IPersonRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ImplPersonService implements IPersonService{
    
     @Autowired IPersonRepository iPersonRepository;
@@ -19,18 +21,19 @@ public class ImplPersonService implements IPersonService{
     }
 
     @Override
-    public void savePerson(Person person) {
-        iPersonRepository.save(person);
+    public Person savePerson(Person person) {
+        Person newPerson = iPersonRepository.save(person);
+        return newPerson;
     }
 
     @Override
-    public void deletePerson(Long id) {
-        iPersonRepository.deleteById(id);
+    public void deletePerson(Long idPerson) {
+        iPersonRepository.deleteById(idPerson);
     }
 
     @Override
-    public Person findPerson(Long id) {
-        Person person = iPersonRepository.findById(id).orElse(null);
+    public Person findPersonById(Long idPerson) {
+        Person person = iPersonRepository.findById(idPerson).orElse(null);
         return person;
     }
     

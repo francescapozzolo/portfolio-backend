@@ -1,21 +1,40 @@
 package com.yoprogramo.portfolio.Entity;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import lombok.*;
 
 @Getter @Setter
 @Entity
-public class Education {
+@Table(name = "education")
+public class Education implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_education", nullable = false)
+    private Long idEducation;
     
-    @NotNull
-    private String title; 
+    @Column(name = "title_education", length = 200, nullable = false)
+    private String titleEducation; 
     
+    @Column(name = "is_finished", nullable = false)
     private boolean isFinished; 
     
-    private String grade;
+    @Column(name = "pic_education", length = 500, nullable = false)
+    private String picEducation; 
+    
+    @Column(name = "institution", length = 500, nullable = false)
+    private String institution;
+
+    public Education() {
+    }
+
+    public Education(Long idEducation, String titleEducation, boolean isFinished, String picEducation, String institution) {
+        this.idEducation = idEducation;
+        this.titleEducation = titleEducation;
+        this.isFinished = isFinished;
+        this.picEducation = picEducation;
+        this.institution = institution;
+    }
+    
 }

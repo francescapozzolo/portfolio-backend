@@ -1,27 +1,45 @@
 package com.yoprogramo.portfolio.Entity;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import lombok.*;
 
 @Getter @Setter
 @Entity
-public class Experience {
+@Table(name = "experience")
+public class Experience implements Serializable{
    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name = "id_experience", nullable = false)
+    private Long idExperience;
     
-    @NotNull
-    private String jobTitle;
+    @Column(name = "experience_title", length = 500, nullable = false)
+    private String experienceTitle;
     
-    private Date startDate;
+    @Column(name = "start_experience", columnDefinition = "DATE", nullable = false)
+    private LocalDate startExperience;
     
-    private Date endDate;
+    @Column(name = "end_experience", columnDefinition = "DATE", nullable = false)
+    private LocalDate end_experience;
     
-    private String description;
+    @Column(name = "experience_description", length = 1000, nullable = false)
+    private String experience_description;
     
-    private String seniority;
+    @Column(name = "company_name", length = 100, nullable = false)
+    private String company_name;
+
+    public Experience() {
+    }
+
+    public Experience(Long idExperience, String experienceTitle, LocalDate startExperience, LocalDate end_experience, String experience_description, String company_name) {
+        this.idExperience = idExperience;
+        this.experienceTitle = experienceTitle;
+        this.startExperience = startExperience;
+        this.end_experience = end_experience;
+        this.experience_description = experience_description;
+        this.company_name = company_name;
+    }
     
 }

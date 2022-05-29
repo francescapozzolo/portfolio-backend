@@ -6,8 +6,10 @@ import com.yoprogramo.portfolio.Repository.IExperienceRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ImplExperienceService implements IExperienceService{
 
     @Autowired IExperienceRepository iExperienceRepository;
@@ -19,18 +21,19 @@ public class ImplExperienceService implements IExperienceService{
     }
 
     @Override
-    public void saveExperience(Experience experience) {
-        iExperienceRepository.save(experience);
+    public Experience saveExperience(Experience experience) {
+        Experience newExperience = iExperienceRepository.save(experience);
+        return newExperience;
     }
 
     @Override
-    public void deleteExperience(Long id) {
-        iExperienceRepository.deleteById(id);
+    public void deleteExperience(Long idExperience) {
+        iExperienceRepository.deleteById(idExperience);
     }
 
     @Override
-    public Experience findExperience(Long id) {
-        Experience experience = iExperienceRepository.findById(id).orElse(null);
+    public Experience findExperienceById(Long idExperience) {
+        Experience experience = iExperienceRepository.findById(idExperience).orElse(null);
         return experience;
     }
     

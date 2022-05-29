@@ -7,9 +7,9 @@ public interface IPersonService {
     
     public List<Person> getPersons();
     
-    public void savePerson(Person person);
+    public Person savePerson(Person person);
     
-    public void deletePerson(Long id);
+    public void deletePerson(Long idPerson);
     
-    public Person findPerson(Long id);
+    public Person findPersonById(Long idPerson);
 }
