@@ -6,8 +6,10 @@ import com.yoprogramo.portfolio.Repository.ISkillRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class ImplSkillService implements ISkillService{
 
     @Autowired ISkillRepository iSkillRepository;
@@ -19,21 +21,20 @@ public class ImplSkillService implements ISkillService{
     }
 
     @Override
-    public void saveSkill(Skill skill) {
-        iSkillRepository.save(skill);
+    public Skill saveSkill(Skill skill) {
+        Skill newSkill = iSkillRepository.save(skill);
+        return newSkill;
     }
 
     @Override
-    public void deleteSkill(Long id) {
-        iSkillRepository.deleteById(id);
+    public void deleteSkill(Long idSkill) {
+        iSkillRepository.deleteById(idSkill);
     }
 
     @Override
-    public Skill findSkill(Long id) {
-        Skill skill = iSkillRepository.findById(id).orElse(null);
+    public Skill findSkillById(Long idSkill) {
+        Skill skill = iSkillRepository.findById(idSkill).orElse(null);
         return skill;
     }
-    
-    
     
 }
